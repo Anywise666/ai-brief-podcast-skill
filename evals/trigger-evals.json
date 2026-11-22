@@ -1,0 +1,22 @@
+[
+  {"id": 1, "should_trigger": true, "query": "我想做一个每天早上自动更新的 AI 行业新闻网站，页面能看每天的动态，最好还能自动生成语音让我通勤路上听，同事说要能在苹果播客里订阅"},
+  {"id": 2, "should_trigger": true, "query": "帮我从零搭一个光伏行业的晨报站，要有日历归档能看到每天的模型发布和产品动态，还要生成中英文双语的 mp3，用 GitHub Pages 托管并能 RSS 订阅到小宇宙"},
+  {"id": 3, "should_trigger": true, "query": "我手上有个每天更新的 JSON 简报数据源，想生成一个单文件 HTML 页面加上双语音频，还要能每天定时自动发布到网上"},
+  {"id": 4, "should_trigger": true, "query": "把我们团队的每日技术简报做成一个可以订阅的播客，每天一期，中文英文都要朗读出来，网页也能看"},
+  {"id": 5, "should_trigger": true, "query": "有没有办法把一份每天更新的行业简报做成一个既能看网页、又能听播客、还能订阅的站点？主题是政策法规解读"},
+  {"id": 6, "should_trigger": true, "query": "用本地数据文件搭个日报仪表盘网站吧，要带播客音频和订阅功能，每天 7 点半自动上线，我昨天听的那个 AI 晨报就是这种感觉"},
+  {"id": 7, "should_trigger": true, "query": "my boss wants a daily industry digest website for our team — she wants it to render as a single HTML file, generate audio in both Chinese and English every morning, and be subscribeable in Spotify"},
+  {"id": 8, "should_trigger": true, "query": "我想搞个 newsletter 转播客的东西，把我每天写的简报自动变成能订阅的音频节目，网页端也有一个好看的归档页"},
+  {"id": 9, "should_trigger": true, "query": "帮我做一个财经早报网站，每天自动更新，要能在手机上听语音版，还要有 RSS 订阅地址发给别人订阅"},
+  {"id": 10, "should_trigger": true, "query": "想搭个站点展示每天的论文和技巧速览，除了网页还想要中英双语的播客 mp3 和 RSS feed，最好配好每天自动更新"},
+  {"id": 11, "should_trigger": false, "query": "帮我把这个 30 页的 PDF 研报转成音频文件，我开车的时候听一下"},
+  {"id": 12, "should_trigger": false, "query": "用 edge-tts 把这句中文读出来存成 mp3：今天天气不错，我们出去走走吧"},
+  {"id": 13, "should_trigger": false, "query": "帮我写个爬虫，每天抓取几个行业网站的新闻标题，存成 JSON 文件放到本地目录里"},
+  {"id": 14, "should_trigger": false, "query": "我的播客节目已经在小宇宙上线了，想优化一下 RSS feed 里的 itunes:category 和封面字段，提升搜索排名"},
+  {"id": 15, "should_trigger": false, "query": "这个 HTML 文件里的正文中文字体太小了，帮我改大一点，行距也调宽一些"},
+  {"id": 16, "should_trigger": false, "query": "我想做一个个人技术博客，用 Markdown 写文章，静态托管到网上就行，不需要别的"},
+  {"id": 17, "should_trigger": false, "query": "帮我看看 aihot.news 这个网站的 API 接口现在返回了什么数据，我想知道今天有哪些 AI 新闻"},
+  {"id": 18, "should_trigger": false, "query": "我要做一个每天早上 8 点给我订阅用户发一封日报邮件的新闻简报系统"},
+  {"id": 19, "should_trigger": false, "query": "用 GitHub Actions 每天凌晨自动跑一个 Python 脚本，把我的数据库备份一下传到对象存储"},
+  {"id": 20, "should_trigger": false, "query": "帮我把这段英文文章翻译成通顺的中文，保持技术术语准确"}
+]

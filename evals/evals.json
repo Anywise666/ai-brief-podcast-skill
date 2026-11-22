@@ -1,0 +1,31 @@
+{
+  "skill_name": "ai-brief-podcast",
+  "evals": [
+    {
+      "id": 1,
+      "name": "local-mode-custom-brand",
+      "prompt": "帮我搭一个光伏行业的每日简报站：品牌叫「光储晨报」，数据源用本地 JSON 文件（我会放在 data/ 目录里），中文音色用男声 YunxiNeural，希望北京时间早上 7:12 上线。要求网页能看、能听中英双语播客、还能生成 RSS 订阅到小宇宙。请直接把站点文件生成出来。",
+      "expected_output": "一套可用的站点文件：site.config.json（local 模式、自定义音色、品牌、上线时间）、参数化后的 index.html（SITE_CFG 注入且无 AI 晨报残留）、scripts/、按 7:12 换算的 workflow、可生成的 feed.xml",
+      "expectations": [
+        "生成 site.config.json，data_mode 为 local，site_name 含「光储晨报」",
+        "index.html 的 SITE_CFG 中 brand 为「光储晨报」且不再残留「AI 晨报 / aihot.news」硬编码",
+        "site.config.json 或 index.html 中 voice_zh 为 zh-CN-YunxiNeural",
+        ".github/workflows/daily-podcast.yml 的 cron 按北京时间 7:12（UTC 前一日 23:12）换算",
+        "scripts/ 下存在 gen_audio.py 与 gen_feed.py，且脚本逻辑走配置驱动"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "aihot-default-online",
+      "prompt": "帮我做一个 AI 行业晨报站，直接用 aihot 在线数据源，每天早上 8 点左右自动更新。网页要能按日期归档查看，另外要生成中英双语的 mp3 音频，让我能用苹果播客（Apple Podcasts）订阅收听。把站点文件直接生成出来。",
+      "expected_output": "一套基于 aihot 默认链路的站点文件：site.config.json（aihot 模式）、参数化 index.html、scripts/、早 8 点窗口 cron、RSS feed",
+      "expectations": [
+        "生成 site.config.json，data_mode 为 aihot，api_base 指向 aihot.news",
+        "index.html 保留 aihot 在线取数逻辑（fetchJson 走 BASE）且 SITE_CFG 完整",
+        ".github/workflows/daily-podcast.yml 的 cron 落在北京时间早 8 点窗口（UTC 00:xx）",
+        "scripts/ 下存在 gen_audio.py 与 gen_feed.py",
+        "产物包含三要素：HTML 仪表盘 + 双语音频脚本 + RSS feed 生成能力"
+      ]
+    }
+  ]
+}

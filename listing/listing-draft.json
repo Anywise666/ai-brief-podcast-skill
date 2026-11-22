@@ -1,0 +1,48 @@
+{
+  "title": "AI 日报/晨报一键生成播客站：网页能看、双语能听、RSS 可订阅，每日自动上线",
+  "subtitle": "一句话做出可看·可听·可订阅的行业晨报站，中英双语播客+RSS+每日自动更新，小白零门槛",
+  "description": "把「一份每天更新的简报」变成一个可以看的网页、可以听的中英双语播客、可以订阅的 RSS 节目，并配好每日自动更新——你只需说清内容来源、主题名称和发布方式，剩下的交给这个 skill。\n\n交付内容：单文件 HTML 仪表盘、中英双语 mp3、RSS 订阅源、GitHub Actions 定时上线，以及一整套踩过坑才有的容错处理。适合做行业晨报/日报站、把文章或 newsletter 转成播客、想让内容每天自动发布并被小宇宙/Apple Podcasts 订阅的人。按技术能力分三档：本地站零门槛、在线站可分享、可订阅站全自动。\n\n触发关键词：AI 日报 / 晨报网站 / 新闻播客 / 日报仪表盘 / 把文章变成播客 / daily brief site\n\n#{播客} #{日报} #{自动化}",
+  "prompt": "帮我做一个每天更新的行业晨报站，主题和数据源我会告诉你。要求：\n1. 生成一个单文件 HTML 仪表盘：顶部 Hero 展示日期与概览，中部锚点导航，正文卡片网格，内联 CSS/JS、响应式、无外部资源\n2. 按 5 个固定版块整理内容，全局连续编号，来源 chip + 中文摘要 + 原文跳转\n3. 用 text-to-speech 生成中英双语 mp3，含 90 秒速览，前端可在线播放\n4. 生成 RSS 播客 feed（含 enclosure），可被小宇宙/Apple Podcasts 订阅\n5. 配好每日自动更新（GitHub Actions + 定时兜底），避开 cron 整点高峰\n6. 按我的技术能力选交付档位：本地站（零门槛）/ 在线站（可分享）/ 可订阅站（全自动）",
+  "locale": "zh",
+  "creationKind": 1,
+  "categories": ["信息与资讯", "办公协同"],
+  "coverMode": "landscape",
+  "previewUrl": "https://anywise666.github.io/ai-news-dashboard/",
+  "translations": {
+    "en": {
+      "title": "AI Daily Brief to Podcast Site: Readable Web, Bilingual Audio, RSS Feed, Auto-Published",
+      "subtitle": "Turn any brief into a site you can read, listen to and subscribe to — bilingual podcast + RSS + daily auto-update, beginner-friendly",
+      "description": "Turn a daily-updating brief into a webpage you can read, a bilingual Chinese-English podcast you can listen to, and an RSS feed people can subscribe to — with daily auto-publishing wired in. You only specify the content source, topic name and publishing preference.\n\nDelivers: a self-contained HTML dashboard, bilingual mp3 audio, an RSS feed, GitHub Actions scheduled publishing, and battle-tested fallbacks. Ideal for industry morning-brief sites, turning articles or newsletters into podcasts, and recurring content subscribers follow in Apple Podcasts or Xiaoyuzhou. Three tiers by technical skill: local site (zero setup), shareable online site, fully automated subscribeable site.\n\nTrigger phrases: AI daily brief / morning brief site / news podcast / daily digest dashboard / turn articles into a podcast / daily brief site",
+      "prompt": "Build a daily-updating industry morning-brief site. Topic and data source will be provided. Requirements:\n1. Self-contained single-file HTML dashboard: hero with date and overview, anchor navigation, responsive card grid, inline CSS/JS, no external resources\n2. Group content into 5 fixed sections, global continuous numbering, source chip + Chinese summary + link to original\n3. Generate bilingual Chinese-English mp3 via text-to-speech, including a 90-second quick brief, playable in-page\n4. Generate an RSS podcast feed with enclosure, subscribeable in Apple Podcasts / Xiaoyuzhou\n5. Wire up daily auto-publishing (GitHub Actions + scheduled fallback), avoiding cron on the hour\n6. Choose the delivery tier by my technical skill: local site / shareable online site / fully automated subscribeable site"
+    }
+  },
+  "assets": [
+    {
+      "assetType": "skill",
+      "displayName": "AI 简报播客站生成器",
+      "required": true,
+      "needOwnKey": false,
+      "assetRef": "<<待填：平台审核通过后生成的资产 ID，形如 skill_2053...>>"
+    }
+  ],
+  "artifacts": [
+    {
+      "artifactType": "code",
+      "label": "SKILL.md（完整工作流）",
+      "fileUrl": "<<待上传：SKILL.md 的 finalUrl>>",
+      "sortOrder": 1
+    },
+    {
+      "artifactType": "doc",
+      "label": "使用说明与数据契约",
+      "fileUrl": "<<待上传：README / data-contract.md 的 finalUrl>>",
+      "sortOrder": 2
+    },
+    {
+      "artifactType": "link",
+      "label": "在线成品演示（可看可听）",
+      "externalUrl": "https://anywise666.github.io/ai-news-dashboard/",
+      "sortOrder": 3
+    }
+  ]
+}

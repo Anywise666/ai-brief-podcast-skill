@@ -1,0 +1,236 @@
+{
+  "metadata": {
+    "skill_name": "ai-brief-podcast",
+    "skill_path": "<path/to/skill>",
+    "executor_model": "<model-name>",
+    "analyzer_model": "<model-name>",
+    "timestamp": "2026-11-22T06:35:53Z",
+    "evals_run": [
+      1,
+      2
+    ],
+    "runs_per_configuration": 3
+  },
+  "runs": [
+    {
+      "eval_id": 1,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "\u751f\u6210 site.config.json\uff0cdata_mode=local \u4e14\u54c1\u724c\u542b\u5149\u50a8\u6668\u62a5",
+          "passed": true,
+          "evidence": "cfg\u5b58\u5728=True, local=True, \u54c1\u724c=True"
+        },
+        {
+          "text": "index.html \u6ce8\u5165\u5149\u50a8\u6668\u62a5\u4e14\u65e0 AI\u6668\u62a5/aihot \u6b8b\u7559",
+          "passed": true,
+          "evidence": "\u54c1\u724c\u6ce8\u5165=True, \u6b8b\u7559=False"
+        },
+        {
+          "text": "\u97f3\u8272\u4e3a zh-CN-YunxiNeural",
+          "passed": true,
+          "evidence": "YunxiNeural\u51fa\u73b0=True"
+        },
+        {
+          "text": "workflow cron \u6309\u5317\u4eac\u65f6\u95f47:12(UTC 23:12)\u6362\u7b97",
+          "passed": true,
+          "evidence": "\u627e\u523023:12\u621612 23=True, wf\u957f\u5ea6=2516"
+        },
+        {
+          "text": "scripts \u542b\u914d\u7f6e\u9a71\u52a8\u7684 gen_audio.py \u4e0e gen_feed.py",
+          "passed": true,
+          "evidence": "gen_audio=True, gen_feed=True, \u914d\u7f6e\u9a71\u52a8=True"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "with_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 1.0,
+        "passed": 5,
+        "failed": 0,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "site.config.json data_mode=aihot \u4e14 api_base \u6307\u5411 aihot.news",
+          "passed": true,
+          "evidence": "cfg\u5b58\u5728=True, aihot=True, url=True"
+        },
+        {
+          "text": "index.html \u4fdd\u7559 aihot \u5728\u7ebf\u53d6\u6570\u4e14 SITE_CFG \u5b8c\u6574",
+          "passed": true,
+          "evidence": "fetchJson/aihot=True, SITE_CFG=True"
+        },
+        {
+          "text": "workflow cron \u843d\u5728\u5317\u4eac\u65f6\u95f4\u65e98\u70b9\u7a97\u53e3(UTC 00:xx)",
+          "passed": true,
+          "evidence": "\u5339\u914dUTC00\u70b9=True, wf\u957f\u5ea6=2454"
+        },
+        {
+          "text": "scripts \u542b gen_audio.py \u4e0e gen_feed.py",
+          "passed": true,
+          "evidence": "gen_audio=True, gen_feed=True"
+        },
+        {
+          "text": "\u4ea7\u7269\u542b\u4e09\u8981\u7d20:HTML\u4eea\u8868\u76d8+\u53cc\u8bed\u97f3\u9891\u811a\u672c+RSS\u80fd\u529b",
+          "passed": true,
+          "evidence": "HTML=True, \u97f3\u9891=True, RSS=True"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 1,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.4,
+        "passed": 2,
+        "failed": 3,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "\u751f\u6210 site.config.json\uff0cdata_mode=local \u4e14\u54c1\u724c\u542b\u5149\u50a8\u6668\u62a5",
+          "passed": false,
+          "evidence": "cfg\u5b58\u5728=False, local=False, \u54c1\u724c=False"
+        },
+        {
+          "text": "index.html \u6ce8\u5165\u5149\u50a8\u6668\u62a5\u4e14\u65e0 AI\u6668\u62a5/aihot \u6b8b\u7559",
+          "passed": true,
+          "evidence": "\u54c1\u724c\u6ce8\u5165=True, \u6b8b\u7559=False"
+        },
+        {
+          "text": "\u97f3\u8272\u4e3a zh-CN-YunxiNeural",
+          "passed": true,
+          "evidence": "YunxiNeural\u51fa\u73b0=True"
+        },
+        {
+          "text": "workflow cron \u6309\u5317\u4eac\u65f6\u95f47:12(UTC 23:12)\u6362\u7b97",
+          "passed": false,
+          "evidence": "\u627e\u523023:12\u621612 23=False, wf\u957f\u5ea6=0"
+        },
+        {
+          "text": "scripts \u542b\u914d\u7f6e\u9a71\u52a8\u7684 gen_audio.py \u4e0e gen_feed.py",
+          "passed": false,
+          "evidence": "gen_audio=False, gen_feed=False, \u914d\u7f6e\u9a71\u52a8=False"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "eval_id": 2,
+      "configuration": "without_skill",
+      "run_number": 1,
+      "result": {
+        "pass_rate": 0.2,
+        "passed": 1,
+        "failed": 4,
+        "total": 5,
+        "time_seconds": 0.0,
+        "tokens": 0,
+        "tool_calls": 0,
+        "errors": 0
+      },
+      "expectations": [
+        {
+          "text": "site.config.json data_mode=aihot \u4e14 api_base \u6307\u5411 aihot.news",
+          "passed": false,
+          "evidence": "cfg\u5b58\u5728=False, aihot=False, url=False"
+        },
+        {
+          "text": "index.html \u4fdd\u7559 aihot \u5728\u7ebf\u53d6\u6570\u4e14 SITE_CFG \u5b8c\u6574",
+          "passed": false,
+          "evidence": "fetchJson/aihot=True, SITE_CFG=False"
+        },
+        {
+          "text": "workflow cron \u843d\u5728\u5317\u4eac\u65f6\u95f4\u65e98\u70b9\u7a97\u53e3(UTC 00:xx)",
+          "passed": true,
+          "evidence": "\u5339\u914dUTC00\u70b9=True, wf\u957f\u5ea6=1197"
+        },
+        {
+          "text": "scripts \u542b gen_audio.py \u4e0e gen_feed.py",
+          "passed": false,
+          "evidence": "gen_audio=False, gen_feed=False"
+        },
+        {
+          "text": "\u4ea7\u7269\u542b\u4e09\u8981\u7d20:HTML\u4eea\u8868\u76d8+\u53cc\u8bed\u97f3\u9891\u811a\u672c+RSS\u80fd\u529b",
+          "passed": false,
+          "evidence": "HTML=True, \u97f3\u9891=False, RSS=True"
+        }
+      ],
+      "notes": []
+    }
+  ],
+  "run_summary": {
+    "with_skill": {
+      "pass_rate": {
+        "mean": 1.0,
+        "stddev": 0.0,
+        "min": 1.0,
+        "max": 1.0
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "without_skill": {
+      "pass_rate": {
+        "mean": 0.3,
+        "stddev": 0.1414,
+        "min": 0.2,
+        "max": 0.4
+      },
+      "time_seconds": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      },
+      "tokens": {
+        "mean": 0.0,
+        "stddev": 0.0,
+        "min": 0,
+        "max": 0
+      }
+    },
+    "delta": {
+      "pass_rate": "+0.70",
+      "time_seconds": "+0.0",
+      "tokens": "+0"
+    }
+  },
+  "notes": []
+}
