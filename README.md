@@ -75,6 +75,10 @@ git clone https://github.com/Anywise666/ai-brief-podcast-skill.git ~/.workbuddy/
 - `edge-tts`（微软非官方 TTS 接口）与 `aihot.news`（第三方数据源）均为外部依赖，任一变动可能影响功能。
 - 本 skill 交付的是「方法论 + 自动化脚本」，用户仍需自备 GitHub 账号 / token（档位 3）与数据源。
 
+## 发版
+
+维护者打包与发布流程见 [`docs/RELEASE.md`](docs/RELEASE.md)（版本号规则、打包脚本用法、GitHub Release 与灵感社区更新步骤）。
+
 ## License
 
 MIT
