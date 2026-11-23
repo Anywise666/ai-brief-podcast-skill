@@ -1,9 +1,9 @@
 ---
 name: ai-brief-podcast
-version: 1.0.0
-display_name: AI 简报播客站生成器
-display_name_en: AI Brief Podcast Site Builder
-description: 'Build a daily-brief dashboard site with auto-generated bilingual (Chinese/English) podcast audio and an RSS subscription feed. Use whenever the user wants to create a "daily news / morning brief / industry digest" website that also plays as audio or can be subscribed to in a podcast app (小宇宙/Apple/Spotify). Covers: single-file self-contained HTML dashboard, text-to-speech mp3 generation, RSS feed, and scheduled auto-update. Trigger on phrases like 每日简报站/晨报网站/新闻播客/播客订阅/日报仪表盘/daily brief site/newsletter 转播客/把文章变成播客, even if the user does not say "skill" or "dashboard" explicitly.'
+version: 1.0.1
+display_name: 新闻播客站生成器：AI日报/晨报+双语RSS
+display_name_en: News Podcast Site Builder - AI Daily Brief & Bilingual RSS
+description: 'Use whenever the user wants to turn a daily brief, morning news digest, industry newsletter or articles into a website people can read, listen to and subscribe to. Builds a self-contained "daily news / morning brief" dashboard site with auto-generated bilingual (Chinese/English) podcast audio and an RSS feed subscribeable in 小宇宙/Apple/Spotify. Covers: single-file HTML dashboard, text-to-speech mp3, RSS feed, and scheduled auto-update. Trigger on phrases like 每日简报站/晨报网站/新闻播客/新闻播客站/播客订阅/日报仪表盘/AI日报/AI晨报/daily brief site/newsletter 转播客/把文章变成播客, even if the user does not say "skill" or "dashboard" explicitly.'
 description_zh: '把一份每天更新的简报变成一个可以看网页、可以听的中英双语播客、可以被订阅的 RSS 节目，并配好每日自动更新。用户只需说清内容来源、主题名称和发布方式，剩下的交给这个 skill——单文件 HTML 仪表盘、中英双语 mp3、订阅源、定时上线以及一整套踩过坑才有的容错处理。适合做行业晨报站、把文章转成播客、让内容每天自动发布并被小宇宙或 Apple Podcasts 订阅的人，按技术能力分三档交付。'
 description_en: 'Turn any daily brief into a website you can read, a bilingual Chinese-English podcast you can listen to, and an RSS feed people can subscribe to, with automatic daily publishing wired in. Users only specify their content source, topic name and publishing preference; the skill delivers a self-contained HTML dashboard, bilingual mp3 audio, an RSS feed, scheduled publishing and a full set of battle-tested fallbacks. Ideal for industry morning-brief sites, converting articles into podcasts, and recurring content that subscribers follow in 小宇宙 or Apple Podcasts.'
 ---
