@@ -1,6 +1,6 @@
 ---
 name: ai-brief-podcast
-version: 1.0.1
+version: 1.1.0
 display_name: 新闻播客站生成器：AI日报/晨报+双语RSS
 display_name_en: News Podcast Site Builder - AI Daily Brief & Bilingual RSS
 description: 'Use whenever the user wants to turn a daily brief, morning news digest, industry newsletter or articles into a website people can read, listen to and subscribe to. Builds a self-contained "daily news / morning brief" dashboard site with auto-generated bilingual (Chinese/English) podcast audio and an RSS feed subscribeable in 小宇宙/Apple/Spotify. Covers: single-file HTML dashboard, text-to-speech mp3, RSS feed, and scheduled auto-update. Trigger on phrases like 每日简报站/晨报网站/新闻播客/新闻播客站/播客订阅/日报仪表盘/AI日报/AI晨报/daily brief site/newsletter 转播客/把文章变成播客, even if the user does not say "skill" or "dashboard" explicitly.'
@@ -36,13 +36,15 @@ description_en: 'Turn any daily brief into a website you can read, a bilingual C
 
 三个档位，能力递增、门槛递增。**默认推荐档位 1**，只有用户明确要 RSS 订阅或固定域名时才上档位 2/3。
 
-| 档位 | 交付内容 | 用户需要准备 | 适合 |
-|---|---|---|---|
-| 1 · 本地站 | 单文件 HTML + 当天 mp3，双击即可看/听 | 什么都不用 | 小白、先看效果 |
-| 2 · 在线站 | 发布为可分享链接，每天手动或用 WorkBuddy 定时任务更新 | 一个 WorkBuddy 账号 | 想分享给别人看 |
-| 3 · 可订阅站 | GitHub Pages 固定域名 + Actions 每日自动生成音频与重建 RSS + 播客订阅 | GitHub 账号、开 Pages、token 读写权限 | 真要每天自动订阅 |
+| 档位 | 交付内容 | 播客功能 | 用户需要准备 | 适合 |
+|---|---|---|---|---|
+| 1 · 本地站 | 单文件 HTML，双击即可看 | 不启用（纯文字） | 什么都不用 | 小白、先看效果 |
+| 2 · 在线站 | 发布为可分享链接，每天手动或用 WorkBuddy 定时任务更新数据 | 不启用（纯文字） | 一个 WorkBuddy 账号 | 想分享给别人看 |
+| 3 · 可订阅站 | GitHub Pages 固定域名 + Actions 每日自动生成音频与重建 RSS + 播客订阅 | 启用（音频 + RSS + 订阅） | GitHub 账号、开 Pages、token 读写权限 | 真要每天自动订阅 |
 
 对每个档位都要**明确告诉用户门槛和取舍**，不要默默替他选高的——尤其别一上来就要求小白去配 GitHub token。
+
+**功能与档位严格对应（硬性要求）**：只做当前档位要求的功能，**不显示未启用的功能**。档位 1/2 的播客开关 `podcast=false`，页面不出现"听播客 / 90 秒速览 / 订阅"按钮，只呈现文字内容；档位 3 才设 `podcast=true` 并生成音频链。绝不能留下"按钮能点但没反应"的半成品——这是 v1.0 的真实故障根因。
 
 档位 2 使用平台自带的静态站点发布能力（workbuddy_sites_deploy）；档位 3 需要 GitHub Actions workflow。
 
@@ -78,9 +80,12 @@ description_en: 'Turn any daily brief into a website you can read, a bilingual C
 - **音频优先用预生成 mp3**：页面先尝试 `<audio src="audio/<日期>/brief_zh.mp3">`，加载失败（404）才回退浏览器 `Web Speech API` 朗读。
   - 这一步是硬性要求：**微信内置浏览器不支持 Web Speech API**，没有预生成 mp3 就意味着微信里点"听"没反应。
 - **偏好存 localStorage**：收藏、已读、主题、字号、播放倍速（刷新不丢，无需后端）。
-- 必备元素：日历/日期切换、卡片列表、每条的播放按钮、90 秒速览按钮、订阅入口（档位 3）、深浅色切换。
+- 必备元素：日历/日期切换、卡片列表、收藏/分享、深浅色切换、字号调节。
+- **播客相关元素按档位**：模板顶部 `SITE_CFG.podcast` 为总开关。档位 1/2 保持默认 `false`，模板会自动隐藏全部"播放按钮 / 90 秒速览 / 订阅"入口，页面纯文字；档位 3 设为 `true`，这些入口才出现。务必让开关与实际是否生成音频一致——不要只改配置开着开关却不跑音频脚本。
 
-## 第五步：生成双语播客音频
+## 第五步：生成双语播客音频（仅档位 3）
+
+> 档位 1/2 跳过本步与第六、七步，不要生成 `audio/`、`feed.xml`，也不要在页面露出播客入口。
 
 调用 `scripts/gen_audio.py <日期>`（依赖 `pip install edge-tts`）：
 
@@ -128,15 +133,27 @@ description_en: 'Turn any daily brief into a website you can read, a bilingual C
 5. **最后防线**：在 WorkBuddy 建一个定时兜底任务（脚本 `scripts/ensure_today.sh`），检查线上当天 mp3 是否存在，缺失才本地补跑。时间同样设在目标上线窗口内（如 08:40），确保不破坏"早上上线"的承诺。
 6. **权限**：workflow 需要 `contents: write`，仓库 Settings → Actions → Workflow permissions 设为 Read and write。
 
-Windows 本地环境注意：代理可能间歇性拦截 `github.com` 的 git 传输（SSL 握手失败 / CONNECT 502），push 要带重试；`api.github.com` 通常通但连接器 token 未必有写权限，别依赖它推文件。
+Windows 本地环境注意：代理可能间歇性拦截 `github.com` 的 git 传输（SSL 握手失败 / CONNECT 502），push 要带 `GIT_HTTP_VERSION=HTTP/1.1` 并重试。**当 `github.com` 完全不通时，`api.github.com` 往往仍可用**——`scripts/ensure_today.sh` 已内置降级：`git push` 失败后自动调用 `scripts/push_via_api.py`，用 `git credential fill` 取本地凭据走 GitHub REST API 推送（支持二进制 mp3），再 `git reset --soft` 对齐本地。不要删这个兜底：实测过 git push 连续 14 次 502、API 一次成功的场景。
 
-## 第八步：交付与验证
+## 第八步：交付与验证（强制门禁，未通过不算交付完成）
 
-- 档位 1：给出 HTML 路径，说明双击打开、当天 mp3 位置。
-- 档位 2：发布链接 + 说明如何手动更新或在 WorkBuddy 建定时任务。
-- 档位 3：固定站点地址 + RSS 订阅地址 + 让用户在播客 App 里订阅测试的 steps。
+**这一步是硬性门禁，不是建议。** 每次交付前必须实际执行下列验证命令并确认输出，禁止仅凭"脚本写了应该没问题"就交付——v1.0 的热搜站正是因为跳过这步，交付了一个播客按钮点了没反应的半成品，几天后才被发现。
 
-交付前自查：页面能打开、当天音频能播放、feed 的 enclosure 返回 200、定时 workflow 语法正确且触发键包含 schedule/push/workflow_dispatch。
+先跑统一样机脚本（随包附带，按档位自检）：
+
+```bash
+bash scripts/verify_delivery.sh <档位 1|2|3> [站点根目录]
+```
+
+脚本会检查：页面存在且 `SITE_CFG.podcast` 与档位一致、数据文件齐全；档位 3 还会实际调用一次音频脚本生成当天音频、检查 `manifest.json` 有条目、重建 feed 并校验 enclosure 文件存在。**脚本报 FAIL 就必须修到 PASS 才能交付。**
+
+交付后再做人工确认：
+
+- 档位 1：给出 HTML 路径，双击打开确认页面正常、无播客按钮。
+- 档位 2：发布链接 + 说明如何手动更新或在 WorkBuddy 建定时任务；确认页面无播客按钮。
+- 档位 3：固定站点地址 + RSS 订阅地址 + 让用户在播客 App 里订阅测试的 steps；确认页面有播客按钮且能播放、feed 的 enclosure 链接线上返回 200 且 `Content-Type` 为 `audio/*`、定时 workflow 语法正确且触发键包含 schedule/push/workflow_dispatch。
+
+**档位与功能一致性复述**：交付时向用户明确说明本档位包含/不包含哪些功能（尤其档位 1/2 明确告知"本站在文字模式，不含播客/订阅"），让用户预期与实际交付一致。
 
 ## 参考资源
 
@@ -146,13 +163,15 @@ Windows 本地环境注意：代理可能间歇性拦截 `github.com` 的 git �
 - `scripts/common.py` — 公共模块：配置读取 + 数据契约解析
 - `scripts/gen_audio.py` — 双语音频生成（配置驱动）
 - `scripts/gen_feed.py` — RSS 生成（配置驱动）
-- `scripts/ensure_today.sh` — 定时兜底检查（WorkBuddy 定时任务用）
+- `scripts/ensure_today.sh` — 定时兜底检查（WorkBuddy 定时任务用；git push 失败自动降级 API）
+- `scripts/push_via_api.py` — GitHub REST API 推送助手（github.com 被代理阻断时的兜底）
+- `scripts/verify_delivery.sh` — 交付前强制自检脚本（按档位验证，第八步门禁）
 - `references/data-contract.md` — 数据契约 + aihot / 本地 JSON 适配示例
 
 > 资源状态：以上 bundled 资源均已从参考项目 `ai-news-dashboard` 抽取并完成参数化（2026-11-22）。脚本已通过冒烟测试、陌生主题 E2E 实测与功能 A/B 基准（带 skill 100% vs 裸模型 30%），本 SKILL.md 通过 skill-creator 结构校验，已打包为 `.skill` 可直接安装。
 >
 > 代用户生成站点时的操作顺序：
-> 1. 把 `assets/site.config.example.json` 复制为站点根目录的 `site.config.json`，按用户填写。字段分组：`site_name`/`brand_line`/`site_desc`/`site_url`/`data_credit` 是品牌；`data_mode`（`aihot`|`local`）+ `api_base`/`local_data_dir` 是数据源；`voice_zh`/`voice_en`/`keep_days` 是音频；`podcast_category`/`podcast_author`/`max_episodes` 是 RSS；`pub_hour`/`cron_minutes`/`fallback_hour`/`fallback_minute` 是上线时间（北京时间）。
+> 1. 把 `assets/site.config.example.json` 复制为站点根目录的 `site.config.json`，按用户填写。字段分组：`site_name`/`brand_line`/`site_desc`/`site_url`/`data_credit` 是品牌；**`podcast` 是档位总开关（档位 3=true，档位 1/2=false，须与 `index.html` 顶部 `SITE_CFG.podcast` 一致）**；`data_mode`（`aihot`|`local`）+ `api_base`/`local_data_dir` 是数据源；`voice_zh`/`voice_en`/`keep_days` 是音频；`podcast_category`/`podcast_author`/`max_episodes` 是 RSS；`pub_hour`/`cron_minutes`/`fallback_hour`/`fallback_minute` 是上线时间（北京时间）。
 > 2. 把 `assets/dashboard-template.html` 复制为 `index.html`，按 `site.config.json` 替换文件顶部的 `SITE_CFG` 对象。**注意 `data_mode` 要写成 SITE_CFG 的 `dataMode` 字段**——`local` 模式必须做三处页面改造，完整配方见 `references/data-contract.md` 的「local 模式」小节（E2E 实测验证过，别漏 `data/index.json`）。
 > 3. 复制 `scripts/` 到站点根目录同级；复制 `assets/daily-podcast.yml` 到 `.github/workflows/daily-podcast.yml`，按第七步的换算规则把 `pub_hour`/`cron_minutes` 换成 UTC cron 行（模板里示例是 8 点的，**不是所有站点都照抄**）。
 > 4. 档位 3 另需在 WorkBuddy 建定时任务调用 `scripts/ensure_today.sh`（用配置的 `fallback_hour/minute`）。

@@ -119,6 +119,10 @@
   @keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(251,113,133,.5)}50%{box-shadow:0 0 0 8px rgba(251,113,133,0)}}
   .lead-card .listen{margin-top:12px}
   .podcast-tip{font-size:12px;color:var(--mut);opacity:.85}
+  /* 档位1/2：未启用播客时隐藏全部音频/订阅 UI，只保留文字内容 */
+  html.no-podcast .listen,html.no-podcast .tb-btn.brief,html.no-podcast #subBtn,
+  html.no-podcast .audio-bar,html.no-podcast .guide-mask,html.no-podcast #subMask,
+  html.no-podcast .podcast-tip{display:none !important}
   .audio-bar{position:sticky;bottom:14px;z-index:50;max-width:760px;margin:18px auto 0;
     background:rgba(20,26,44,.97);border:1px solid rgba(56,189,248,.35);border-radius:14px;
     padding:12px 16px;display:none;align-items:center;gap:12px;box-shadow:0 10px 34px rgba(0,0,0,.5)}
@@ -408,6 +412,7 @@ var SITE_CFG = {
   brandEn: "AI HOT",
   dataCredit: "aihot.news",
   docTitle: "AI 晨报 · 日历档案",
+  podcast: false,
   sections: [
     {key:"ai-models",   label:"模型发布/更新", color:"#38bdf8"},
     {key:"ai-products", label:"产品发布/更新", color:"#a78bfa"},
@@ -421,6 +426,8 @@ var SITE_CFG = {
   var BASE = SITE_CFG.apiBase;
   var BRAND = SITE_CFG.brand, BRAND_EN = SITE_CFG.brandEn, CREDIT = SITE_CFG.dataCredit;
   var SECTIONS_META = SITE_CFG.sections;
+  // 档位开关：只有显式 podcast:true 才显示播客/订阅入口；档位1/2 保持纯文字
+  if (SITE_CFG.podcast !== true) document.documentElement.classList.add('no-podcast');
   // 用配置覆盖静态 HTML 中的品牌文字（生成站点时只需改顶部 SITE_CFG）
   document.title = SITE_CFG.docTitle || (BRAND + ' · 日历档案');
   var _kicker = document.querySelector('.hero .kicker');

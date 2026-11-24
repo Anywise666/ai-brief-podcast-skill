@@ -1,8 +1,10 @@
 {
+  "_说明": "podcast=true 时生成播客/RSS/订阅入口（档位3）；false 时页面只显示文字，不生成音频链（档位1/2）。必须同步写入 index.html 顶部 SITE_CFG.podcast。",
   "site_name": "AI 晨报",
   "site_desc": "每天一期，90 秒听懂当天最重要的资讯。",
   "site_url": "https://YOURNAME.github.io/YOUR-REPO",
   "brand_line": "AI 晨报",
+  "podcast": true,
   "data_credit": "aihot.news",
   "data_mode": "aihot",
   "api_base": "https://aihot.news/api/v1",
