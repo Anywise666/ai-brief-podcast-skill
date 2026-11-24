@@ -1,10 +1,10 @@
 ---
 name: ai-brief-podcast
-version: 1.1.0
+version: 1.1.1
 display_name: 新闻播客站生成器：AI日报/晨报+双语RSS
 display_name_en: News Podcast Site Builder - AI Daily Brief & Bilingual RSS
 description: 'Use whenever the user wants to turn a daily brief, morning news digest, industry newsletter or articles into a website people can read, listen to and subscribe to. Builds a self-contained "daily news / morning brief" dashboard site with auto-generated bilingual (Chinese/English) podcast audio and an RSS feed subscribeable in 小宇宙/Apple/Spotify. Covers: single-file HTML dashboard, text-to-speech mp3, RSS feed, and scheduled auto-update. Trigger on phrases like 每日简报站/晨报网站/新闻播客/新闻播客站/播客订阅/日报仪表盘/AI日报/AI晨报/daily brief site/newsletter 转播客/把文章变成播客, even if the user does not say "skill" or "dashboard" explicitly.'
-description_zh: '把一份每天更新的简报变成一个可以看网页、可以听的中英双语播客、可以被订阅的 RSS 节目，并配好每日自动更新。用户只需说清内容来源、主题名称和发布方式，剩下的交给这个 skill——单文件 HTML 仪表盘、中英双语 mp3、订阅源、定时上线以及一整套踩过坑才有的容错处理。适合做行业晨报站、把文章转成播客、让内容每天自动发布并被小宇宙或 Apple Podcasts 订阅的人，按技术能力分三档交付。'
+description_zh: '把一份每天更新的简报变成一个可以看网页、可以听的中英双语播客、可以被订阅的 RSS 节目，并配好每日自动更新。用户只需说清内容来源、主题名称和发布方式，剩下的交给这个 skill——单文件 HTML 仪表盘、中英双语 mp3、订阅源、定时上线以及一整套踩过坑才有的容错处理。适合做行业晨报站、把文章转成播客、让内容每天自动发布并被小宇宙或 Apple Podcasts 订阅的人，按需求分三档交付：只想自己看效果、想发链接给别人看、想让别人每天能听能订阅——用户按想要什么结果选档，不按技术能力选。'
 description_en: 'Turn any daily brief into a website you can read, a bilingual Chinese-English podcast you can listen to, and an RSS feed people can subscribe to, with automatic daily publishing wired in. Users only specify their content source, topic name and publishing preference; the skill delivers a self-contained HTML dashboard, bilingual mp3 audio, an RSS feed, scheduled publishing and a full set of battle-tested fallbacks. Ideal for industry morning-brief sites, converting articles into podcasts, and recurring content that subscribers follow in 小宇宙 or Apple Podcasts.'
 ---
 
@@ -28,21 +28,23 @@ description_en: 'Turn any daily brief into a website you can read, a bilingual C
 1. **内容来源**：一个 JSON API、一个 RSS、一个固定格式的文件，还是"先用示例数据"？
    - 这是最关键的决策。音频和页面都依赖结构化数据，必须先定义数据契约（见下）。
 2. **站点主题与名称**：中文站名、简介、播客名。
-3. **发布方式**：见第二步的分级——这决定是否要 GitHub 账号和能否长期订阅。
+3. **发布方式（想要什么结果）**：按第二步的需求分档——是想自己先看效果、想发链接给别人看，还是想让别人每天能听能订阅。这决定是否要 GitHub 账号和能否长期订阅。别直接问"你会不会用 GitHub"，先问用户想拿它做什么。
 
 如果用户只要一个"能看的 demo"，允许用示例数据先把站点跑起来，别卡在数据源上。
 
-## 第二步：按用户技术能力分级（小白优先默认最低档）
+## 第二步：按用户需求分级（拿不准默认最低档）
 
-三个档位，能力递增、门槛递增。**默认推荐档位 1**，只有用户明确要 RSS 订阅或固定域名时才上档位 2/3。
+三个档位，能力递增、门槛递增。**按"用户想要什么结果"选档，不按"用户会不会技术"选**——技术强的人也可能只想本地先看效果，小白也可能就是想要能订阅的播客。拿不准时默认推荐档位 1，用户明确说"要发链接给别人"才上档位 2，明确说"要能听能订阅、每天自动更新"才上档位 3。
 
-| 档位 | 交付内容 | 播客功能 | 用户需要准备 | 适合 |
+| 档位 | 一句话选它（用户需求） | 交付内容 | 播客功能 | 用户需要准备 |
 |---|---|---|---|---|
-| 1 · 本地站 | 单文件 HTML，双击即可看 | 不启用（纯文字） | 什么都不用 | 小白、先看效果 |
-| 2 · 在线站 | 发布为可分享链接，每天手动或用 WorkBuddy 定时任务更新数据 | 不启用（纯文字） | 一个 WorkBuddy 账号 | 想分享给别人看 |
-| 3 · 可订阅站 | GitHub Pages 固定域名 + Actions 每日自动生成音频与重建 RSS + 播客订阅 | 启用（音频 + RSS + 订阅） | GitHub 账号、开 Pages、token 读写权限 | 真要每天自动订阅 |
+| 1 · 本地站 | "我先自己看看效果" | 单文件 HTML，双击即可看 | 不启用（纯文字） | 什么都不用 |
+| 2 · 在线站 | "我要发个链接给别人看" | 发布为可分享链接，每天手动或用 WorkBuddy 定时任务更新数据 | 不启用（纯文字） | 一个 WorkBuddy 账号 |
+| 3 · 可订阅站 | "我要别人每天能听、能订阅、自动更新" | GitHub Pages 固定域名 + Actions 每日自动生成音频与重建 RSS + 播客订阅 | 启用（音频 + RSS + 订阅） | GitHub 账号、开 Pages、token 读写权限 |
 
-对每个档位都要**明确告诉用户门槛和取舍**，不要默默替他选高的——尤其别一上来就要求小白去配 GitHub token。
+**问用户时的标准话术**（照着问，别问"你会不会用 GitHub"）：只想自己打开看 → 档位 1；想发链接给别人看 → 档位 2；想让别人在播客 App 里订阅、每天自动更新 → 档位 3。用户没说清就默认档位 1，并明确告知"随时能升级"。
+
+**功能边界要前置讲清**：档位 1/2 只做文字、页面不出现播客/订阅入口；只有档位 3 才有"听"和"订阅"。这句话必须在用户选档时就说，不要等交付后才发现预期不符——这是 v1.0 热搜站"按钮能点没反应"故障的预期管理根源。
 
 **功能与档位严格对应（硬性要求）**：只做当前档位要求的功能，**不显示未启用的功能**。档位 1/2 的播客开关 `podcast=false`，页面不出现"听播客 / 90 秒速览 / 订阅"按钮，只呈现文字内容；档位 3 才设 `podcast=true` 并生成音频链。绝不能留下"按钮能点但没反应"的半成品——这是 v1.0 的真实故障根因。
 
@@ -153,7 +155,7 @@ bash scripts/verify_delivery.sh <档位 1|2|3> [站点根目录]
 - 档位 2：发布链接 + 说明如何手动更新或在 WorkBuddy 建定时任务；确认页面无播客按钮。
 - 档位 3：固定站点地址 + RSS 订阅地址 + 让用户在播客 App 里订阅测试的 steps；确认页面有播客按钮且能播放、feed 的 enclosure 链接线上返回 200 且 `Content-Type` 为 `audio/*`、定时 workflow 语法正确且触发键包含 schedule/push/workflow_dispatch。
 
-**档位与功能一致性复述**：交付时向用户明确说明本档位包含/不包含哪些功能（尤其档位 1/2 明确告知"本站在文字模式，不含播客/订阅"），让用户预期与实际交付一致。
+**档位与功能一致性复述**：交付时用"你想要的结果"向用户确认本档位包含/不包含哪些功能（尤其档位 1/2 明确告知"本站在文字模式，不含播客/订阅；想要能听能订阅可随时升级到档位 3"），让用户预期与实际交付一致。
 
 ## 参考资源
 
