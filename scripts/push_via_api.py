@@ -93,7 +93,10 @@ def main():
     base_tree = commit["tree"]["sha"]
 
     # 本地 HEAD 相对父提交的变更文件（兜底脚本先 commit 再调用本脚本）
-    out = run(["git", "diff-tree", "--no-commit-id", "--name-only", "-r", "HEAD"]).stdout
+    # core.quotepath=false：否则 git 会把中文文件名转义成八进制（\344\270...），
+    # 导致 os.path.isfile 找不到文件而静默跳过（曾漏推 listing/README-上架说明.md）
+    out = run(["git", "-c", "core.quotepath=false", "diff-tree",
+               "--no-commit-id", "--name-only", "-r", "HEAD"]).stdout
     files = [f for f in out.splitlines() if f.strip()]
     if not files:
         print("NO_CHANGES")
